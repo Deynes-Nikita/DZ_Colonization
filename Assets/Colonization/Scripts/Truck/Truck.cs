@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace BotsPickers
+namespace Colonization
 {
     [RequireComponent(typeof(TruckMovement))]
     [RequireComponent(typeof(ProductsHandler))]
+    [RequireComponent(typeof(SuperMarketSpawner))]
     public class Truck : MonoBehaviour
     {
         [SerializeField] private float _interactionDistance = 3.5f;
@@ -11,28 +13,34 @@ namespace BotsPickers
 
         private TruckMovement _movement;
         private ProductsHandler _handler;
+        private SuperMarketSpawner _superMarketSpawner;
 
         private Product _product;
 
         private bool _isBusy = false;
+        private bool _isBusyforBuilding = false;
         private bool _isProductAvailable = false;
 
         public bool IsBusy => _isBusy;
+
+        public event Action ArrivedToBuilding;
+        public event Action <Product> TargetMissed;
 
         private void Awake()
         {
             _movement = GetComponent<TruckMovement>();
             _handler = GetComponent<ProductsHandler>();
+            _superMarketSpawner = GetComponent<SuperMarketSpawner>();
         }
 
         private void OnEnable()
         {
-            _movement.Arrived += OnHandlingProduct;
+            _movement.Arrived += OnArrivedToPoint;
         }
 
         private void OnDisable()
         {
-            _movement.Arrived += OnHandlingProduct;
+            _movement.Arrived += OnArrivedToPoint;
         }
 
         public void SetTargetSuperMarket(SuperMarket targetSuperMarket)
@@ -50,6 +58,13 @@ namespace BotsPickers
             _isBusy = true;
 
             StartMove(_product.transform.position, _product);
+        }
+
+        public void GetTaskOfBuildingSuperMarket(Flag flag)
+        {
+            StopMove();
+            _isBusyforBuilding = true;
+            StartMove(flag.transform.position, flag);
         }
 
         private void StartMove(Vector3 targetPosition, ITargeted targeted)
@@ -70,11 +85,24 @@ namespace BotsPickers
         private void ResetTask()
         {
             StopMove();
-            _isBusy = false;
+
+            if (_isProductAvailable == false)
+            {
+                _isBusy = false;
+            }
+            else
+            {
+                ReturnToSuperMarket();
+            }
         }
 
-        private void OnHandlingProduct()
+        private void OnArrivedToPoint()
         {
+            if (_isBusyforBuilding == true)
+            {
+                BuildingSuperMarket();
+            }
+
             if (_isProductAvailable)
             {
                 _handler.Drop(_superMarket);
@@ -90,9 +118,21 @@ namespace BotsPickers
                 }
                 else
                 {
+                    TargetMissed?.Invoke(_product);
                     ResetTask();
                 }
             }
+        }
+
+        private void BuildingSuperMarket()
+        {
+            ArrivedToBuilding?.Invoke();
+
+            SetTargetSuperMarket(_superMarketSpawner.Create());
+            _superMarket.AddTruck(this);
+            _isBusyforBuilding = false;
+
+            ResetTask();
         }
     }
 }

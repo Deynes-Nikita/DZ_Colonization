@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BotsPickers
+namespace Colonization
 {
     public class BootPoint : MonoBehaviour
     {

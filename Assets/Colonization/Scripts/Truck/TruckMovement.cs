@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace BotsPickers
+namespace Colonization
 {
     public class TruckMovement : MonoBehaviour
     {

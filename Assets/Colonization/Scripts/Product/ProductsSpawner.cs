@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Pool;
 
-namespace BotsPickers
+namespace Colonization
 {
     public class ProductsSpawner : MonoBehaviour
     {

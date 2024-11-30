@@ -736,6 +736,10 @@ GameObject:
   - component: {fileID: 5644071979267213775}
   - component: {fileID: 4560427179160494720}
   - component: {fileID: -5738472468600046319}
+  - component: {fileID: 5194791092369235754}
+  - component: {fileID: -8277822652652285058}
+  - component: {fileID: 3673891877254501527}
+  - component: {fileID: 1883435723177452136}
   m_Layer: 6
   m_Name: Building_Super Market
   m_TagString: Base
@@ -871,6 +875,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aefd8af7cb7fa1c4087c85c1f5e33f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _truckPrice: 3
+  _superMarketPrice: 5
+  _minLimitTruck: 1
   _trucks: []
   _receivingPoint: {fileID: 4638282951835520533}
 --- !u!114 &5644071979267213775
@@ -885,7 +892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfc58a7d33e4b6f4fa752f9e162e3eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _radius: 10
+  _radius: 100
 --- !u!114 &4560427179160494720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,6 +921,65 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: -0.23700002, y: 1.894, z: 0.41300002}
   m_TimeToStationary: 0.5
+--- !u!114 &5194791092369235754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443458865466689410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4dceb163a2766b4e99f3db4f2095619, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _truckPrefab: {fileID: 2072385742686866231, guid: ad50cf349e10df5469b0eec62a117b67, type: 3}
+  _spawnPoint: {fileID: 9130852350078681692}
+--- !u!114 &-8277822652652285058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443458865466689410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed28846169fe8134ead155b5e3e95aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _colorWhenHover: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _colorWhenSelect: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &3673891877254501527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443458865466689410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 10
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &1883435723177452136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7443458865466689410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ebbf06d468600409e9cb7afdb0950d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flagPrefab: {fileID: -1207589140225396535, guid: 569310e19b57e2f40a7607ed49b81f6a, type: 3}
 --- !u!1 &8036324335246559334
 GameObject:
   m_ObjectHideFlags: 0

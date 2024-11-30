@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace BotsPickers
+namespace Colonization
 {
     public class StatusViewer : MonoBehaviour
     {

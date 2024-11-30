@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Base
   - Truck
-  - Good
+  - Product
   layers:
   - Default
   - TransparentFX
@@ -16,8 +16,8 @@ TagManager:
   - UI
   - Base
   - Truck
-  - Goods
-  - 
+  - Product
+  - Flag
   - 
   - 
   - 

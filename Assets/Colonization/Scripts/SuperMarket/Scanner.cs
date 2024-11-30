@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BotsPickers
+namespace Colonization
 {
     public class Scanner : MonoBehaviour
     {
-        [SerializeField] private float _radius = 1f;
+        [SerializeField] private float _radius = 100f;
 
         public List<Product> Scan()
         {

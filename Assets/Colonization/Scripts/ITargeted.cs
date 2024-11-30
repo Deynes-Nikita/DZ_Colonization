@@ -1,4 +1,4 @@
-namespace BotsPickers
+namespace Colonization
 {
     public interface ITargeted
     {

@@ -676,6 +676,63 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: c970989c550d8d441946922e5f0bb64a, type: 2}
   m_BuildHeightMesh: 0
+--- !u!1001 &1259808513605301067
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4825601623422449317, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825601623422449317, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825601623422449317, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825601623422449317, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825601623422449317, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825601623422449317, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825601623422449317, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825601623422449317, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825601623422449317, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4825601623422449317, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6726630790427942144, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
+      propertyPath: m_Name
+      value: SelectorInteractiveObject
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bfce283fc19144b4ea1268ccef355ad4, type: 3}
 --- !u!1001 &3295103143145219555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -690,7 +747,7 @@ PrefabInstance:
       objectReference: {fileID: 1678929479}
     - target: {fileID: 2246272179314239978, guid: e7eeee6b4fd17b94f955067c6b7ea602, type: 3}
       propertyPath: _repeatRate
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2246272179314239978, guid: e7eeee6b4fd17b94f955067c6b7ea602, type: 3}
       propertyPath: _maxCountGoods
@@ -702,7 +759,7 @@ PrefabInstance:
       objectReference: {fileID: 5911682001210842515, guid: ce6a4dcc322c584478f0230278314983, type: 3}
     - target: {fileID: 2246272179314239978, guid: e7eeee6b4fd17b94f955067c6b7ea602, type: 3}
       propertyPath: _maxCountProducts
-      value: 5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2717753508041167234, guid: e7eeee6b4fd17b94f955067c6b7ea602, type: 3}
       propertyPath: m_LocalPosition.x
@@ -822,6 +879,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 49909842045427992, guid: c63504ded200d214da9d20e92109c910, type: 3}
+      propertyPath: _truckPrice
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 49909842045427992, guid: c63504ded200d214da9d20e92109c910, type: 3}
+      propertyPath: _superMarketPrice
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 49909842045427992, guid: c63504ded200d214da9d20e92109c910, type: 3}
       propertyPath: _trucks.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -841,6 +906,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 3673891877254501527, guid: c63504ded200d214da9d20e92109c910, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5644071979267213775, guid: c63504ded200d214da9d20e92109c910, type: 3}
       propertyPath: _radius
       value: 100
@@ -915,3 +984,4 @@ SceneRoots:
   - {fileID: 1638108327}
   - {fileID: 674032932}
   - {fileID: 3295103143145219555}
+  - {fileID: 1259808513605301067}

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace BotsPickers
+namespace Colonization
 {
     public class Counter : MonoBehaviour
     {
