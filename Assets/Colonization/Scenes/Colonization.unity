@@ -759,7 +759,7 @@ PrefabInstance:
       objectReference: {fileID: 5911682001210842515, guid: ce6a4dcc322c584478f0230278314983, type: 3}
     - target: {fileID: 2246272179314239978, guid: e7eeee6b4fd17b94f955067c6b7ea602, type: 3}
       propertyPath: _maxCountProducts
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2717753508041167234, guid: e7eeee6b4fd17b94f955067c6b7ea602, type: 3}
       propertyPath: m_LocalPosition.x
