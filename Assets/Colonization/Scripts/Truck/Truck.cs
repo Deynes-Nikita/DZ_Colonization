@@ -24,7 +24,7 @@ namespace Colonization
         public bool IsBusy => _isBusy;
 
         public event Action ArrivedToBuilding;
-        public event Action <Product> TargetMissed;
+        public event Action<Product> TargetMissed;
 
         private void Awake()
         {
@@ -86,14 +86,9 @@ namespace Colonization
         {
             StopMove();
 
-            if (_isProductAvailable == false)
-            {
-                _isBusy = false;
-            }
-            else
-            {
-                ReturnToSuperMarket();
-            }
+            _isBusy = false;
+
+            _isBusyforBuilding = false;
         }
 
         private void OnArrivedToPoint()
@@ -101,6 +96,7 @@ namespace Colonization
             if (_isBusyforBuilding == true)
             {
                 BuildingSuperMarket();
+                return;
             }
 
             if (_isProductAvailable)
@@ -128,11 +124,10 @@ namespace Colonization
         {
             ArrivedToBuilding?.Invoke();
 
+            ResetTask();
+
             SetTargetSuperMarket(_superMarketSpawner.Create());
             _superMarket.AddTruck(this);
-            _isBusyforBuilding = false;
-
-            ResetTask();
         }
     }
 }
