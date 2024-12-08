@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Colonization
@@ -25,6 +24,7 @@ namespace Colonization
         private List<Product> _currentProducts = new List<Product>();
         private Truck _buildingTruck = null;
         private bool _isflagInstalled = false;
+        private int _score = 0;
 
         public Vector3 ReceivingPoint => _receivingPoint.position;
 
@@ -39,7 +39,7 @@ namespace Colonization
 
         private void OnEnable()
         {
-            _counter.ScoreRecalculated += OnCreate;
+            _counter.ScoreRecalculated += OnGetScore;
             _interactable.Selected += OnSelectPointForNewSupermarket;
             _flagInstaller.Installed += OnGetReadyToBuild;
 
@@ -51,7 +51,7 @@ namespace Colonization
 
         private void OnDisable()
         {
-            _counter.ScoreRecalculated -= OnCreate;
+            _counter.ScoreRecalculated -= OnGetScore;
             _interactable.Selected -= OnSelectPointForNewSupermarket;
             _flagInstaller.Installed -= OnGetReadyToBuild;
         }
@@ -63,6 +63,7 @@ namespace Colonization
 
         private void Update()
         {
+            OnCreate();
             SendForProducts();
         }
 
@@ -140,16 +141,21 @@ namespace Colonization
             truck.GetTask(product);
         }
 
-        private void OnCreate(int score)
+        private void OnGetScore(int score)
+        {
+            _score = score;
+        }
+
+        private void OnCreate()
         {
             if (_isflagInstalled == true)
             {
-                if (score >= _superMarketPrice)
+                if (_score >= _superMarketPrice && TrySelectTruck (out Truck truck))
                 {
-                    SendToBuildSuperMarket(_flagInstaller.GetFlag());
+                    SendToBuildSuperMarket(_flagInstaller.GetFlag(), truck);
                 }
             }
-            else if (score >= _truckPrice)
+            else if (_score >= _truckPrice)
             {
                 CreateTruck();
             }
@@ -187,13 +193,13 @@ namespace Colonization
             _isflagInstalled = true;
         }
 
-        private void SendToBuildSuperMarket(Flag flag)
+        private void SendToBuildSuperMarket(Flag flag, Truck truck)
         {
             if (_buildingTruck == null)
             {
                 if (_counter.TryBuy(_superMarketPrice))
                 {
-                    _buildingTruck = _trucks.LastOrDefault();
+                    _buildingTruck = truck;
 
                     RemoveTruck(_buildingTruck);
 

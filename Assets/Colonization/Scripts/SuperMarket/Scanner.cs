@@ -11,7 +11,7 @@ namespace Colonization
         {
             List<Product> products = new List<Product>();
 
-            foreach (Product product in GetGoods())
+            foreach (Product product in GetProducts())
             {
                 products.Add(product);
             }
@@ -19,7 +19,7 @@ namespace Colonization
             return products;
         }
 
-        private List<Product> GetGoods()
+        private List<Product> GetProducts()
         {
             List<Product> products = new List<Product>();
 

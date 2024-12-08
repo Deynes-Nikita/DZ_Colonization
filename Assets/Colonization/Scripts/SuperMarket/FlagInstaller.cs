@@ -6,6 +6,8 @@ namespace Colonization
 {
     public class FlagInstaller : MonoBehaviour
     {
+        private const int LeftMouseButtonIndex = 0;
+
         [SerializeField] private Flag _flagPrefab;
 
         private Flag _flag;
@@ -19,9 +21,6 @@ namespace Colonization
 
         public Flag GetFlag()
         {
-            if(_flag == null)
-                return null;
-
             return _flag;
         }
 
@@ -42,7 +41,7 @@ namespace Colonization
 
             while (isSelectPiont == false)
             {
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButton(LeftMouseButtonIndex))
                 {
                     ray = camera.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out hit, raycastDistance))

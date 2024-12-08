@@ -12,7 +12,7 @@ namespace Colonization
         [SerializeField] private Terrain _ground;
 
         private ObjectPool<Product> _productsPool;
-        private int _countSpawnGoods = 0;
+        private int _countSpawnProducts = 0;
 
         private void Awake()
         {
@@ -33,7 +33,7 @@ namespace Colonization
         {
             Product product = Instantiate(_productPrefab);
             product.gameObject.SetActive(false);
-            product.Collected += ReturnGoodToPool;
+            product.Collected += ReturnProductToPool;
 
             return product;
         }
@@ -51,22 +51,22 @@ namespace Colonization
 
         private void DestroyProduct(Product product)
         {
-            product.Collected -= ReturnGoodToPool;
+            product.Collected -= ReturnProductToPool;
             Destroy(product.gameObject);
         }
 
         private void GetProduct()
         {
-            if (_maxCountProducts > _countSpawnGoods)
+            if (_maxCountProducts > _countSpawnProducts)
             {
                 _productsPool.Get();
-                _countSpawnGoods++;
+                _countSpawnProducts++;
             }
         }
 
-        private void ReturnGoodToPool(Product product)
+        private void ReturnProductToPool(Product product)
         {
-            _countSpawnGoods--;
+            _countSpawnProducts--;
             _productsPool.Release(product);
         }
 

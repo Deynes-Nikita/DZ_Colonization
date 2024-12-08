@@ -5,12 +5,12 @@ namespace Colonization
 {
     public class SelectorInteractiveObject : MonoBehaviour
     {
+        private const int LeftMouseButtonIndex = 0;
+
         private float _raycastDistance = 100f;
         private Camera _camera;
         private Interactable _previousInteractable;
         private Interactable _selectInteractable;
-        RaycastHit _hit;
-        Ray _ray;
 
         private void Awake()
         {
@@ -19,13 +19,13 @@ namespace Colonization
 
         private void Update()
         {
-            _ray = _camera.ScreenPointToRay(Input.mousePosition);
+            Ray _ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(_ray, out _hit, _raycastDistance))
+            if (Physics.Raycast(_ray, out RaycastHit _hit, _raycastDistance))
             {
                 Interactable interactable = _hit.collider.GetComponent<Interactable>();
 
-                if (Input.GetMouseButtonDown(0) && _selectInteractable != null)
+                if (Input.GetMouseButtonDown(LeftMouseButtonIndex) && _selectInteractable != null)
                 {
                     _selectInteractable.OnHoverExit();
                     _selectInteractable = null;
@@ -39,7 +39,7 @@ namespace Colonization
                         _previousInteractable = interactable;
                     }
 
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(LeftMouseButtonIndex))
                     {
                         if (_selectInteractable != null)
                         {
