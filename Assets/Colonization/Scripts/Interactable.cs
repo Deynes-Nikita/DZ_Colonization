@@ -19,18 +19,18 @@ namespace Colonization
             _outline.enabled = false;
         }
 
-        public void OnHoverEnter()
+        public void HoverEnter()
         {
             _outline.OutlineColor = _colorWhenHover;
             _outline.enabled = true;
         }
 
-        public void OnHoverExit()
+        public void HoverExit()
         {
             _outline.enabled = false;
         }
 
-        public void OnSelect()
+        public void Select()
         {
             _outline.OutlineColor = _colorWhenSelect;
             _outline.enabled = true;

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Colonization
 {
     [RequireComponent(typeof(TruckMovement))]
-    [RequireComponent(typeof(ProductsHandler))]
+    [RequireComponent(typeof(ProductCollector))]
     [RequireComponent(typeof(SuperMarketSpawner))]
     public class Truck : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace Colonization
         [SerializeField] private SuperMarket _superMarket;
 
         private TruckMovement _movement;
-        private ProductsHandler _handler;
+        private ProductCollector _handler;
         private SuperMarketSpawner _superMarketSpawner;
 
         private Product _product;
@@ -23,13 +23,13 @@ namespace Colonization
 
         public bool IsBusy => _isBusy;
 
-        public event Action ArrivedToBuilding;
+        public event Action ArrivedToBuild;
         public event Action<Product> TargetMissed;
 
         private void Awake()
         {
             _movement = GetComponent<TruckMovement>();
-            _handler = GetComponent<ProductsHandler>();
+            _handler = GetComponent<ProductCollector>();
             _superMarketSpawner = GetComponent<SuperMarketSpawner>();
         }
 
@@ -60,7 +60,7 @@ namespace Colonization
             StartMove(_product.transform.position, _product);
         }
 
-        public void GetTaskOfBuildingSuperMarket(Flag flag)
+        public void GetTaskOfBuildSuperMarket(Flag flag)
         {
             StopMove();
             _isBusyforBuilding = true;
@@ -69,12 +69,12 @@ namespace Colonization
 
         private void StartMove(Vector3 targetPosition, ITargeted targeted)
         {
-            _movement.OnMove(targetPosition, _interactionDistance, targeted);
+            _movement.Move(targetPosition, _interactionDistance, targeted);
         }
 
         private void StopMove()
         {
-            _movement.StopMoving();
+            _movement.StopMove();
         }
 
         private void ReturnToSuperMarket()
@@ -95,7 +95,7 @@ namespace Colonization
         {
             if (_isBusyforBuilding == true)
             {
-                BuildingSuperMarket();
+                BuildSuperMarket();
                 return;
             }
 
@@ -120,9 +120,9 @@ namespace Colonization
             }
         }
 
-        private void BuildingSuperMarket()
+        private void BuildSuperMarket()
         {
-            ArrivedToBuilding?.Invoke();
+            ArrivedToBuild?.Invoke();
 
             ResetTask();
 

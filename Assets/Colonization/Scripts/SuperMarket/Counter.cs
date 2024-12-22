@@ -31,7 +31,7 @@ namespace Colonization
             return true;
         }
 
-        public void GetTruckCount(int truckCount)
+        public void SetTruckCount(int truckCount)
         {
             if (truckCount <= 0)
                 return;

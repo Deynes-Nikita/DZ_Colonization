@@ -2,15 +2,12 @@
 
 namespace Colonization
 {
-    public class ProductsHandler : MonoBehaviour
+    public class ProductCollector : MonoBehaviour
     {
+        [SerializeField] private BootPoint bootPoint;
+        
         private Vector3 _bootPoint;
         private Product _products;
-
-        private void Start()
-        {
-            _bootPoint = GetComponentInChildren<BootPoint>().transform.localPosition;
-        }
 
         public bool TryPickup(Product product)
         {

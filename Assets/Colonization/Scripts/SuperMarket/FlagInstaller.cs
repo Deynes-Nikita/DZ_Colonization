@@ -6,7 +6,7 @@ namespace Colonization
 {
     public class FlagInstaller : MonoBehaviour
     {
-        private const int LeftMouseButtonIndex = 0;
+        private const int MouseButtonIndexForInstall = 0;
 
         [SerializeField] private Flag _flagPrefab;
 
@@ -14,7 +14,7 @@ namespace Colonization
 
         public event Action Installed;
 
-        public void OnSelectPointForBuilding()
+        public void SelectPointForBuild()
         {
             StartCoroutine(SelectPointForNewSupermarket());
         }
@@ -41,7 +41,7 @@ namespace Colonization
 
             while (isSelectPiont == false)
             {
-                if (Input.GetMouseButton(LeftMouseButtonIndex))
+                if (Input.GetMouseButton(MouseButtonIndexForInstall))
                 {
                     ray = camera.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out hit, raycastDistance))

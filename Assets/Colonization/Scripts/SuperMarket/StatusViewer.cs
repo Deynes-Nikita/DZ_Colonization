@@ -11,22 +11,22 @@ namespace Colonization
 
         private void OnEnable()
         {
-            _counter.ScoreRecalculated += ShowProductsCount;
-            _counter.TruckRecalculated += ShowTruckCount;
+            _counter.ScoreRecalculated += OnShowProductsCount;
+            _counter.TruckRecalculated += OnShowTruckCount;
         }
 
         private void OnDisable()
         {
-            _counter.ScoreRecalculated -= ShowProductsCount;
-            _counter.TruckRecalculated -= ShowTruckCount;
+            _counter.ScoreRecalculated -= OnShowProductsCount;
+            _counter.TruckRecalculated -= OnShowTruckCount;
         }
 
-        private void ShowTruckCount(int truckCount)
+        private void OnShowTruckCount(int truckCount)
         {
             _showTruckCount.text = truckCount.ToString();
         }
 
-        private void ShowProductsCount(int productsCount)
+        private void OnShowProductsCount(int productsCount)
         {
             _showProductsCount.text = productsCount.ToString();
         }

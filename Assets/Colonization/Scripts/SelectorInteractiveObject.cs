@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 
 namespace Colonization
 {
     public class SelectorInteractiveObject : MonoBehaviour
     {
-        private const int LeftMouseButtonIndex = 0;
+        private const int MouseButtonIndexForSelect = 0;
 
         private float _raycastDistance = 100f;
         private Camera _camera;
@@ -25,9 +24,9 @@ namespace Colonization
             {
                 Interactable interactable = _hit.collider.GetComponent<Interactable>();
 
-                if (Input.GetMouseButtonDown(LeftMouseButtonIndex) && _selectInteractable != null)
+                if (Input.GetMouseButtonDown(MouseButtonIndexForSelect) && _selectInteractable != null)
                 {
-                    _selectInteractable.OnHoverExit();
+                    _selectInteractable.HoverExit();
                     _selectInteractable = null;
                 }
 
@@ -35,18 +34,18 @@ namespace Colonization
                 {
                     if (interactable != _previousInteractable && interactable != _selectInteractable)
                     {
-                        interactable.OnHoverEnter();
+                        interactable.HoverEnter();
                         _previousInteractable = interactable;
                     }
 
-                    if (Input.GetMouseButtonDown(LeftMouseButtonIndex))
+                    if (Input.GetMouseButtonDown(MouseButtonIndexForSelect))
                     {
                         if (_selectInteractable != null)
                         {
-                            _selectInteractable.OnHoverExit();
+                            _selectInteractable.HoverExit();
                         }
 
-                        interactable.OnSelect();
+                        interactable.Select();
                         _selectInteractable = interactable;
                     }
                 }
@@ -54,7 +53,7 @@ namespace Colonization
                 {
                     if (_previousInteractable != null && _previousInteractable != _selectInteractable)
                     {
-                        _previousInteractable.OnHoverExit();
+                        _previousInteractable.HoverExit();
                         _previousInteractable = null;
                     }
                 }

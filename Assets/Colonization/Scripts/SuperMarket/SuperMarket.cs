@@ -39,7 +39,7 @@ namespace Colonization
 
         private void OnEnable()
         {
-            _counter.ScoreRecalculated += OnGetScore;
+            _counter.ScoreRecalculated += OnSetScore;
             _interactable.Selected += OnSelectPointForNewSupermarket;
             _flagInstaller.Installed += OnGetReadyToBuild;
 
@@ -51,19 +51,19 @@ namespace Colonization
 
         private void OnDisable()
         {
-            _counter.ScoreRecalculated -= OnGetScore;
+            _counter.ScoreRecalculated -= OnSetScore;
             _interactable.Selected -= OnSelectPointForNewSupermarket;
             _flagInstaller.Installed -= OnGetReadyToBuild;
         }
 
         private void Start()
         {
-            _counter.GetTruckCount(_trucks.Count);
+            _counter.SetTruckCount(_trucks.Count);
         }
 
         private void Update()
         {
-            OnCreate();
+            CreateNewObject();
             SendForProducts();
         }
 
@@ -78,7 +78,7 @@ namespace Colonization
             _trucks.Add(truck);
 
             truck.TargetMissed += OnRestartTartgetProduct;
-            _counter.GetTruckCount(_trucks.Count);
+            _counter.SetTruckCount(_trucks.Count);
         }
 
         private bool TrySelectProduct(out Product product)
@@ -141,12 +141,12 @@ namespace Colonization
             truck.GetTask(product);
         }
 
-        private void OnGetScore(int score)
+        private void OnSetScore(int score)
         {
             _score = score;
         }
 
-        private void OnCreate()
+        private void CreateNewObject()
         {
             if (_isflagInstalled == true)
             {
@@ -177,14 +177,14 @@ namespace Colonization
             
             truck.TargetMissed -= OnRestartTartgetProduct;
 
-            _counter.GetTruckCount(_trucks.Count);
+            _counter.SetTruckCount(_trucks.Count);
         }
 
         private void OnSelectPointForNewSupermarket()
         {
             if (_trucks.Count > _minLimitTruck)
             {
-                _flagInstaller.OnSelectPointForBuilding();
+                _flagInstaller.SelectPointForBuild();
             }
         }
 
@@ -203,11 +203,11 @@ namespace Colonization
 
                     RemoveTruck(_buildingTruck);
 
-                    _buildingTruck.ArrivedToBuilding += OnArrivedToBuilding;
+                    _buildingTruck.ArrivedToBuild += OnArrivedToBuilding;
                 }
             }
 
-            _buildingTruck.GetTaskOfBuildingSuperMarket(flag);
+            _buildingTruck.GetTaskOfBuildSuperMarket(flag);
         }
 
         private void OnArrivedToBuilding()
@@ -219,7 +219,7 @@ namespace Colonization
 
         private void ForgetBuildingTruck()
         {
-            _buildingTruck.ArrivedToBuilding -= OnArrivedToBuilding;
+            _buildingTruck.ArrivedToBuild -= OnArrivedToBuilding;
 
             _buildingTruck = null;
         }
