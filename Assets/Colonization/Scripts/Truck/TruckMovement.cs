@@ -17,12 +17,12 @@ namespace Colonization
             _agent = GetComponent<NavMeshAgent>();
         }
 
-        public void Move(Vector3 targetPosition, float interactionDistance, ITargeted target)
+        public void StartMove(Vector3 targetPosition, float interactionDistance, ITargeted target)
         {
             if (_moveCoroutine != null)
                 StopMove();
 
-            _moveCoroutine = StartCoroutine(Movement(targetPosition, interactionDistance, target));
+            _moveCoroutine = StartCoroutine(Move(targetPosition, interactionDistance, target));
         }
 
         public void StopMove()
@@ -33,7 +33,7 @@ namespace Colonization
             _moveCoroutine = null;
         }
 
-        private IEnumerator Movement(Vector3 targetPosition, float interactionDistance, ITargeted target)
+        private IEnumerator Move(Vector3 targetPosition, float interactionDistance, ITargeted target)
         {
             bool isMoving = true;
             float distance;

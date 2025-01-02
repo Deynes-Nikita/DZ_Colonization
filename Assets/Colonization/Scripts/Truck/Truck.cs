@@ -69,7 +69,7 @@ namespace Colonization
 
         private void StartMove(Vector3 targetPosition, ITargeted targeted)
         {
-            _movement.Move(targetPosition, _interactionDistance, targeted);
+            _movement.StartMove(targetPosition, _interactionDistance, targeted);
         }
 
         private void StopMove()

@@ -18,47 +18,68 @@ namespace Colonization
 
         private void Update()
         {
-            Ray _ray = _camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(_ray, out RaycastHit _hit, _raycastDistance))
+            if (Physics.Raycast(ray, out RaycastHit hit, _raycastDistance))
             {
-                Interactable interactable = _hit.collider.GetComponent<Interactable>();
-
-                if (Input.GetMouseButtonDown(MouseButtonIndexForSelect) && _selectInteractable != null)
-                {
-                    _selectInteractable.HoverExit();
-                    _selectInteractable = null;
-                }
-
-                if (interactable != null)
-                {
-                    if (interactable != _previousInteractable && interactable != _selectInteractable)
-                    {
-                        interactable.HoverEnter();
-                        _previousInteractable = interactable;
-                    }
-
-                    if (Input.GetMouseButtonDown(MouseButtonIndexForSelect))
-                    {
-                        if (_selectInteractable != null)
-                        {
-                            _selectInteractable.HoverExit();
-                        }
-
-                        interactable.Select();
-                        _selectInteractable = interactable;
-                    }
-                }
-                else
-                {
-                    if (_previousInteractable != null && _previousInteractable != _selectInteractable)
-                    {
-                        _previousInteractable.HoverExit();
-                        _previousInteractable = null;
-                    }
-                }
-
+                TrySelectObject(hit.collider.GetComponent<Interactable>());
             }
+        }
+
+        private bool TrySelectObject(Interactable interactable)
+        {
+            if (Input.GetMouseButtonDown(MouseButtonIndexForSelect) && _selectInteractable != null)
+            {
+                DeselectObject(_selectInteractable);
+                _selectInteractable = null;
+            }
+
+            if (interactable != null)
+            {
+                if (interactable != _previousInteractable && interactable != _selectInteractable)
+                {
+                    HighlightObject(interactable);
+                }
+
+                if (Input.GetMouseButtonDown(MouseButtonIndexForSelect))
+                {
+                    if (_selectInteractable != null)
+                    {
+                        DeselectObject(_selectInteractable);
+                    }
+
+                    SelectObject(interactable);
+                }
+
+                return true;
+            }
+            else
+            {
+                if (_previousInteractable != null && _previousInteractable != _selectInteractable)
+                {
+                    DeselectObject(_previousInteractable);
+                    _previousInteractable = null;
+                }
+
+                return false;
+            }
+        }
+
+        private void HighlightObject(Interactable interactable)
+        {
+            interactable.HoverEnter();
+            _previousInteractable = interactable;
+        }
+
+        private void SelectObject(Interactable interactable)
+        {
+            interactable.Select();
+            _selectInteractable = interactable;
+        }
+
+        private void DeselectObject(Interactable interactable)
+        {
+            interactable.HoverExit();
         }
     }
 }
